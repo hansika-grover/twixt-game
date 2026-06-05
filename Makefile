@@ -1,26 +1,31 @@
-twixt: main.o game.o board.o valid.o geom.o links.o win.o
-	gcc -o twixt main.o game.o board.o valid.o geom.o links.o win.o
+CC       ?= gcc
+CFLAGS   ?= -Wall -Wextra -std=c11 -O2
+CPPFLAGS  = -MMD -MP          # auto-generate header-dependency files
+TARGET    = twixt
+PREFIX   ?= /usr/local
 
-main.o: main.c game.h
-	gcc -c main.c
+SRCS = $(wildcard *.c)
+OBJS = $(SRCS:.c=.o)
+DEPS = $(OBJS:.o=.d)
 
-game.o: game.c game.h board.h valid.h links.h win.h
-	gcc -c game.c
+all: $(TARGET)
 
-board.o: board.c board.h game.h
-	gcc -c board.c
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
 
-valid.o: valid.c valid.h board.h game.h
-	gcc -c valid.c
+%.o: %.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
-geom.o: geom.c geom.h
-	gcc -c geom.c
+run: $(TARGET)
+	./$(TARGET)
 
-links.o: links.c links.h board.h geom.h game.h
-	gcc -c links.c
-
-win.o: win.c win.h game.h
-	gcc -c win.c
+install: $(TARGET)
+	install -d $(DESTDIR)$(PREFIX)/bin
+	install -m 755 $(TARGET) $(DESTDIR)$(PREFIX)/bin/$(TARGET)
 
 clean:
-	rm -f main.o game.o board.o valid.o geom.o links.o win.o twixt
+	rm -f $(OBJS) $(DEPS) $(TARGET)
+
+.PHONY: all run install clean
+
+-include $(DEPS)
