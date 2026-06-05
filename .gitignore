@@ -1,0 +1,14 @@
+# Compiled object files
+*.o
+*.obj
+
+# Executable
+twixt
+*.exe
+*.out
+
+# Debug symbols / misc build artifacts
+*.dSYM/
+*.gch
+*.d
+core
