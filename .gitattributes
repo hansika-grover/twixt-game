@@ -1,0 +1,10 @@
+# Store all text files with LF in the repository and check them out with LF
+* text=auto eol=lf
+
+*.c       text eol=lf
+*.h       text eol=lf
+Makefile  text eol=lf
+
+# Future-proofing: never mangle binary assets (e.g. screenshots in the README)
+*.png binary
+*.gif binary
