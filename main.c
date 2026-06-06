@@ -7,9 +7,14 @@ int main(){
     while(1){
         menushow();
         
-        if(scanf("%d",&ch) != 1){
+        int r = scanf("%d",&ch);
+        if(r == EOF){
+            printf("\nno more input, exiting\n");
+            return 0;
+        }
+        if(r != 1){
             printf("please enter a valid number\n");
-            while(getchar()!='\n');
+            int c; while((c=getchar())!='\n' && c!=EOF);
             continue;
         }
         

@@ -29,9 +29,14 @@ void putpeg(char *player){
     int row,col;
     printf("which spot? enter row then column: ");
     
-    if(scanf("%d %d", &row, &col) != 2){
+    int r = scanf("%d %d", &row, &col);
+    if(r == EOF){
+        printf("\nno more input\n");
+        return;
+    }
+    if(r != 2){
         printf("incorrect, give two numbers\n");
-        while(getchar()!='\n');
+        int c; while((c=getchar())!='\n' && c!=EOF);
         return;
     }
     
@@ -70,9 +75,14 @@ void startgame(){
         printf("its player %c turn now\n", current);
         gamemenu();
         
-        if(scanf("%d",&choice) != 1){
+        int r = scanf("%d",&choice);
+        if(r == EOF){
+            printf("\nno more input, returning to menu\n");
+            break;
+        }
+        if(r != 1){
             printf("please enter valid input\n");
-            while(getchar()!='\n');
+            int c; while((c=getchar())!='\n' && c!=EOF);
             continue;
         }
         
