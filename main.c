@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "game.h"
+#include "input.h"
+
 
 int main(){
     int ch;
@@ -7,14 +9,13 @@ int main(){
     while(1){
         menushow();
         
-        int r = scanf("%d",&ch);
+        int r = read_int(&ch);
         if(r == EOF){
             printf("\nno more input, exiting\n");
             return 0;
         }
-        if(r != 1){
+        if(r == 0){
             printf("please enter a valid number\n");
-            int c; while((c=getchar())!='\n' && c!=EOF);
             continue;
         }
         

@@ -4,6 +4,7 @@
 #include "valid.h"
 #include "links.h"
 #include "win.h"
+#include "input.h"
 
 link alllinks[MAXLINK];
 int numlinks = 0;
@@ -29,14 +30,13 @@ void putpeg(char *player){
     int row,col;
     printf("which spot? enter row then column: ");
     
-    int r = scanf("%d %d", &row, &col);
+    int r = read_two_ints(&row, &col);
     if(r == EOF){
         printf("\nno more input\n");
         return;
     }
-    if(r != 2){
+    if(r == 0){
         printf("incorrect, give two numbers\n");
-        int c; while((c=getchar())!='\n' && c!=EOF);
         return;
     }
     
@@ -75,14 +75,13 @@ void startgame(){
         printf("its player %c turn now\n", current);
         gamemenu();
         
-        int r = scanf("%d",&choice);
+        int r = read_int(&choice);
         if(r == EOF){
             printf("\nno more input, returning to menu\n");
             break;
         }
-        if(r != 1){
+        if(r == 0){
             printf("please enter valid input\n");
-            int c; while((c=getchar())!='\n' && c!=EOF);
             continue;
         }
         
