@@ -26,18 +26,18 @@ void gamemenu(){
     printf("choose: ");
 }
 
-void putpeg(char *player){
+int putpeg(char *player){
     int row,col;
     printf("which spot? enter row then column: ");
     
     int r = read_two_ints(&row, &col);
     if(r == EOF){
         printf("\nno more input\n");
-        return;
+        return 0;
     }
     if(r == 0){
         printf("incorrect, give two numbers\n");
-        return;
+        return 0;
     }
     
     if(checkpeg(row,col,*player)){
@@ -50,13 +50,17 @@ void putpeg(char *player){
             *player = 'B';
         else
             *player = 'R';
+        return 1;
     }
+    return 0;
 }
 
 void startgame(){
     setupgrid();
+    numlinks=0;
     char current = 'R';
     int choice;
+    int pegs_placed =0;
     
     while(1){
         showgrid();
@@ -71,6 +75,12 @@ void startgame(){
             printf("going back...\n");
             break;
         }
+        if(pegs_placed >= MAX_PEGS){
+            printf("\nThe board is full - the game is a draw!\n");
+            printf("going back...\n");
+            break;
+        }
+
         
         printf("its player %c turn now\n", current);
         gamemenu();
@@ -86,7 +96,7 @@ void startgame(){
         }
         
         if(choice == 1){
-            putpeg(&current);
+            if(putpeg(&current))pegs_placed++;
         }
         else if(choice == 2){
             showlinks();

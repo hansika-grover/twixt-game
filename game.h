@@ -3,6 +3,7 @@
 
 #define SIZE 24
 #define MAXLINK 3000
+#define MAX_PEGS (SIZE * SIZE - 4)  /* total playable cells (excludes 4 corners) */
 
 typedef struct {
     int r1, c1;
@@ -18,6 +19,6 @@ extern int reach[SIZE][SIZE];
 void menushow();
 void gamemenu();
 void startgame();
-void putpeg(char *player);
+int putpeg(char *player);
 
 #endif
