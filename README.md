@@ -126,15 +126,15 @@ R at `(1,1)` and `(3,2)` are a knight's move apart (`dr=2, dc=1`) so a link is a
 └── Makefile
 ```
 
-The geometry in `geom.c` deserves a mention: it uses an orientation-based segment intersection test to enforce the no-crossing rule. It works correctly here because knight-move segments on an integer lattice have no interior lattice points — so no peg can ever sit in the middle of an existing link, which eliminates a whole class of edge cases.
+The geometry in `geom.c` uses an orientation-based segment intersection test to enforce the no-crossing rule. It works correctly here because knight-move segments on an integer lattice have no interior lattice points ; so no peg can ever sit in the middle of an existing link, which eliminates a whole class of edge cases.
 
 ---
 
 ## Limitations and known differences from the original game
 
-**Auto-linking.** In the physical board game, placing a link between two pegs is a deliberate choice, and you can skip links you don't want. Here, links form automatically on every placement. This simplifies the interface but removes a real layer of strategy — sometimes in proper Twixt you intentionally leave a connection unmade because it would block a better one later.
+**Auto-linking.** In the physical board game, placing a link between two pegs is a deliberate choice, and you can skip links you don't want. Here, links form automatically on every placement. This simplifies the interface but removes a real layer of strategy ; sometimes in proper Twixt you intentionally leave a connection unmade because it would block a better one later.
 
-**No swap rule.** The first player (Red) has a well-documented opening advantage in Twixt. Competitive play typically includes a "swap" option letting the second player take Red's first move instead. That's not implemented here — whoever goes first plays Red.
+**No swap rule.** The first player (Red) has a well-documented opening advantage in Twixt. Competitive play typically includes a "swap" option letting the second player take Red's first move instead. That's not implemented here ; whoever goes first plays Red.
 
 **Two players only.** No AI opponent. Both players share the same keyboard.
 
